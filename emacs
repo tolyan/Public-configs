@@ -17,16 +17,12 @@
 ;; Add utf-8 encoding for slime
 (setq slime-net-coding-system 'utf-8-unix)
 
-
 ;;run slime and set it as default page
 (slime)
 (setq inhibit-startup-screen t)
 (setq initial-buffer-choice "*slime-repl sbcl*")
 
-
-
-;;define  maximize and run at startup
-
+;;define  maximized window and run at startup
 (defun toggle-fullscreen (&optional f)
       (interactive)
       (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -42,3 +38,6 @@
     (add-hook 'after-make-frame-functions 'toggle-fullscreen)
 
 (toggle-fullscreen)
+
+;;split windows
+(split-window-vertically)
