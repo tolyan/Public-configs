@@ -31,13 +31,33 @@
                                     (if (boundp 'old-fullscreen) old-fullscreen nil)
                                     (progn (setq old-fullscreen current-value)
                                            'maximized)))))
-    (global-set-key [f11] 'toggle-fullscreen)
+(global-set-key [f11] 'toggle-fullscreen)
     ; Make new frames fullscreen by default. Note: this hook doesn't do
     ; anything to the initial frame if it's in your .emacs, since that file is
     ; read _after_ the initial frame is created.
-    (add-hook 'after-make-frame-functions 'toggle-fullscreen)
-
+(add-hook 'after-make-frame-functions 'toggle-fullscreen)
 (toggle-fullscreen)
+
+;;; Unbind `C-x f'
+(global-unset-key "\C-xf")
+
+;;; Rebind `C-x C-b' for `buffer-menu'
+(global-set-key "\C-x\C-b" 'buffer-menu)
+
+;;; Keybinding for `occur'
+(global-set-key "\C-f" 'occur)
 
 ;;split windows
 (split-window-vertically)
+
+;; add persistent TODO list
+(defun toggle-todo (&optional f)
+  (interactive)
+  (let ((todo-window (get-buffer-window "*TODO*")))
+    (if todo-window
+	(progn 
+	  (save-buffer)
+	  (delete-window todo-window))
+      (find-file-other-window "*TODO*"))))
+  
+(global-set-key [f12] 'toggle-todo)
