@@ -1,5 +1,25 @@
-;Auto-complete http://cx4a.org/software/auto-complete/
 (add-to-list 'load-path "~/.emacs.d/")
+
+(require 'package)
+(add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;remove toolbar and icons
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))	
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;Color thems
+;(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+;(require 'color-theme)
+;(color-theme-initialize)
+;(color-theme-robin-hood)
+
+
+;Auto-complete http://cx4a.org/software/auto-complete/
+
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
 (ac-config-default)
@@ -48,7 +68,7 @@
 (global-set-key "\C-f" 'occur)
 
 ;;split windows
-(split-window-vertically)
+;(split-window-vertically)
 
 ;; add persistent TODO list
 (defun toggle-todo (&optional f)
@@ -61,3 +81,20 @@
       (find-file-other-window "*TODO*"))))
   
 (global-set-key [f12] 'toggle-todo)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector [solarized-bg red green yellow blue magenta cyan solarized-fg])
+ '(custom-safe-themes (quote ("d2622a2a2966905a5237b54f35996ca6fda2f79a9253d44793cfe31079e3c92b" "501caa208affa1145ccbb4b74b6cd66c3091e41c5bb66c677feda9def5eab19c" default)))
+ '(fci-rule-color "#073642"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(load-theme 'solarized-dark)
